@@ -94,7 +94,8 @@ const Index = () => {
 
   const handleAdminLogin = () => {
     if (adminLogin.username === 'admin' && adminLogin.password === 'admin123') {
-      setIsAdminLoggedIn(true);
+      setIsAdminOpen(false);
+      window.location.href = '/admin';
     } else {
       alert('Неверные данные для входа');
     }
@@ -144,7 +145,7 @@ const Index = () => {
                   </Badge>
                 )}
               </Button>
-              <Button variant="secondary" onClick={() => window.location.href = '/admin'}>
+              <Button variant="secondary" onClick={() => setIsAdminOpen(true)}>
                 <Icon name="User" size={20} className="mr-2" />
                 Администратор
               </Button>
