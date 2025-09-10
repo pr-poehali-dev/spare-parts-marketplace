@@ -217,10 +217,7 @@ const Index = () => {
                   </Badge>
                 )}
               </Button>
-              <Button variant="secondary" onClick={() => setIsAdminOpen(true)}>
-                <Icon name="User" size={20} className="mr-2" />
-                Администратор
-              </Button>
+
             </div>
           </div>
         </div>
@@ -433,6 +430,14 @@ const Index = () => {
           )}
         </DialogContent>
       </Dialog>
+
+      {/* Admin Button - Fixed at bottom */}
+      <div className="fixed bottom-4 right-4 z-50">
+        <Button variant="secondary" onClick={() => setIsAdminOpen(true)} size="lg">
+          <Icon name="User" size={20} className="mr-2" />
+          Администратор
+        </Button>
+      </div>
     </div>
   );
 };
