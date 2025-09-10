@@ -144,7 +144,7 @@ const Index = () => {
                   </Badge>
                 )}
               </Button>
-              <Button variant="secondary" onClick={() => setIsAdminOpen(true)}>
+              <Button variant="secondary" onClick={() => window.location.href = '/admin'}>
                 <Icon name="User" size={20} className="mr-2" />
                 Администратор
               </Button>
