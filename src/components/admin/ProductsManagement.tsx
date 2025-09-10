@@ -32,6 +32,7 @@ const ProductsManagement: React.FC<ProductsManagementProps> = ({ products, setPr
   
   // Предопределенные категории
   const predefinedCategories = [
+    'Телевизоры',
     'Холодильники',
     'Стиральные машины',
     'Сушильные машины',
