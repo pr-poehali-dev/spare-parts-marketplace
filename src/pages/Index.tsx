@@ -177,29 +177,30 @@ const Index = () => {
                 <div className="flex items-center space-x-2">
                   <Button 
                     variant="outline" 
-                    size="sm" 
+                    size="lg" 
                     onClick={() => window.open(`tel:${storeInfo.phone}`, '_self')}
                     title="Позвонить"
+                    className="h-12 w-12"
                   >
-                    <Icon name="Phone" size={16} />
+                    <Icon name="Phone" size={24} />
                   </Button>
                   <Button 
                     variant="outline" 
-                    size="sm" 
+                    size="lg" 
                     onClick={() => window.open(`https://wa.me/${storeInfo.phone.replace(/[^0-9]/g, '')}`, '_blank')}
                     title="WhatsApp"
-                    className="text-green-600 hover:text-green-700"
+                    className="text-green-600 hover:text-green-700 h-12 w-12"
                   >
-                    <Icon name="MessageCircle" size={16} />
+                    <Icon name="MessageCircle" size={24} />
                   </Button>
                   <Button 
                     variant="outline" 
-                    size="sm" 
+                    size="lg" 
                     onClick={() => window.open(`https://t.me/${storeInfo.phone.replace(/[^0-9]/g, '')}`, '_blank')}
                     title="Telegram"
-                    className="text-blue-500 hover:text-blue-600"
+                    className="text-blue-500 hover:text-blue-600 h-12 w-12"
                   >
-                    <Icon name="Send" size={16} />
+                    <Icon name="Send" size={24} />
                   </Button>
                 </div>
               )}
