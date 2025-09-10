@@ -27,6 +27,33 @@ const ProductsManagement: React.FC<ProductsManagementProps> = ({ products, setPr
     name: '', description: '', price: 0, category: '', specifications: '', image: ''
   });
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [categoryInput, setCategoryInput] = useState('');
+  const [showCategorySuggestions, setShowCategorySuggestions] = useState(false);
+  
+  // Предопределенные категории
+  const predefinedCategories = [
+    'Смартфоны',
+    'Ноутбуки',
+    'Планшеты', 
+    'Наушники',
+    'Аксессуары',
+    'Камеры',
+    'Умные часы',
+    'Геймпады',
+    'Колонки',
+    'Зарядные устройства'
+  ];
+  
+  // Получаем уникальные категории из существующих товаров
+  const existingCategories = [...new Set(products.map(p => p.category).filter(Boolean))];
+  
+  // Объединяем предопределенные и существующие категории
+  const allCategories = [...new Set([...predefinedCategories, ...existingCategories])];
+  
+  // Фильтруем категории по вводу
+  const filteredCategories = allCategories.filter(cat => 
+    cat.toLowerCase().includes(categoryInput.toLowerCase())
+  ).slice(0, 5);
 
   const addProduct = () => {
     if (newProduct.name && newProduct.description && newProduct.price) {
@@ -94,11 +121,36 @@ const ProductsManagement: React.FC<ProductsManagementProps> = ({ products, setPr
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Input
-                placeholder="Категория"
-                value={newProduct.category}
-                onChange={(e) => setNewProduct(prev => ({ ...prev, category: e.target.value }))}
-              />
+              <div className="relative">
+                <Input
+                  placeholder="Категория"
+                  value={categoryInput}
+                  onChange={(e) => {
+                    setCategoryInput(e.target.value);
+                    setNewProduct(prev => ({ ...prev, category: e.target.value }));
+                    setShowCategorySuggestions(true);
+                  }}
+                  onFocus={() => setShowCategorySuggestions(true)}
+                  onBlur={() => setTimeout(() => setShowCategorySuggestions(false), 200)}
+                />
+                {showCategorySuggestions && filteredCategories.length > 0 && (
+                  <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg max-h-40 overflow-y-auto">
+                    {filteredCategories.map((category, index) => (
+                      <div
+                        key={index}
+                        className="px-3 py-2 cursor-pointer hover:bg-gray-100 text-sm"
+                        onClick={() => {
+                          setCategoryInput(category);
+                          setNewProduct(prev => ({ ...prev, category }));
+                          setShowCategorySuggestions(false);
+                        }}
+                      >
+                        {category}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
               <Input
                 placeholder="URL изображения"
                 value={newProduct.image}
