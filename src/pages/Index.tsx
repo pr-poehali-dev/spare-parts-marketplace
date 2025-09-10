@@ -172,6 +172,38 @@ const Index = () => {
               </div>
             </div>
             <div className="flex items-center space-x-4">
+              {/* Contact buttons */}
+              {storeInfo.phone && (
+                <div className="flex items-center space-x-2">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => window.open(`tel:${storeInfo.phone}`, '_self')}
+                    title="Позвонить"
+                  >
+                    <Icon name="Phone" size={16} />
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => window.open(`https://wa.me/${storeInfo.phone.replace(/[^0-9]/g, '')}`, '_blank')}
+                    title="WhatsApp"
+                    className="text-green-600 hover:text-green-700"
+                  >
+                    <Icon name="MessageCircle" size={16} />
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => window.open(`https://t.me/${storeInfo.phone.replace(/[^0-9]/g, '')}`, '_blank')}
+                    title="Telegram"
+                    className="text-blue-500 hover:text-blue-600"
+                  >
+                    <Icon name="Send" size={16} />
+                  </Button>
+                </div>
+              )}
+              
               <Button 
                 variant="outline" 
                 onClick={() => cart.length > 0 && setIsCartOpen(true)}
