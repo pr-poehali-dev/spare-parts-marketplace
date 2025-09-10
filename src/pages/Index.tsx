@@ -276,7 +276,7 @@ const Index = () => {
 
       {/* Admin Dialog */}
       <Dialog open={isAdminOpen} onOpenChange={setIsAdminOpen}>
-        <DialogContent className="max-w-4xl">
+        <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>Панель администратора</DialogTitle>
           </DialogHeader>
