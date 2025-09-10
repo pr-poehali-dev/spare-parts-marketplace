@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -32,6 +32,23 @@ const Index = () => {
   const [newProduct, setNewProduct] = useState({
     name: '', description: '', price: 0, category: '', specifications: ''
   });
+  
+  // Состояние для информации о магазине
+  const [storeInfo, setStoreInfo] = useState({
+    name: 'Магазин бытовой техники',
+    phone: '+7 (495) 123-45-67',
+    address: 'Москва, ул. Примерная, д. 1',
+    workingHours: 'Пн-Пт: 9:00-20:00, Сб-Вс: 10:00-18:00',
+    description: 'Качественная бытовая техника по доступным ценам'
+  });
+
+  // Загружаем данные о магазине из localStorage
+  useEffect(() => {
+    const savedStoreInfo = localStorage.getItem('storeInfo');
+    if (savedStoreInfo) {
+      setStoreInfo(JSON.parse(savedStoreInfo));
+    }
+  }, []);
 
   const [products, setProducts] = useState<Product[]>([
     {
@@ -130,7 +147,7 @@ const Index = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
               <Icon name="Settings" size={32} className="text-primary" />
-              <h1 className="text-2xl font-bold text-gray-900">TechParts Store</h1>
+              <h1 className="text-2xl font-bold text-gray-900">{storeInfo.name}</h1>
             </div>
             <div className="flex items-center space-x-4">
               <Button 
@@ -159,7 +176,7 @@ const Index = () => {
         {/* Search Section */}
         <div className="mb-8">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-6">Поиск запчастей для бытовой техники</h2>
+            <h2 className="text-3xl font-bold text-center mb-6">{storeInfo.description || 'Поиск запчастей для бытовой техники'}</h2>
             <div className="relative">
               <Icon name="Search" size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <Input
@@ -263,6 +280,11 @@ const Index = () => {
                   <span className="text-2xl font-bold text-primary">
                     {getTotalPrice().toLocaleString('ru-RU')} ₽
                   </span>
+                </div>
+                <div className="text-xs text-gray-500 mb-3">
+                  {storeInfo.phone && <p>Тел: {storeInfo.phone}</p>}
+                  {storeInfo.address && <p>Адрес: {storeInfo.address}</p>}
+                  {storeInfo.workingHours && <p>Режим: {storeInfo.workingHours}</p>}
                 </div>
                 <Button className="w-full" size="lg">
                   <Icon name="CreditCard" size={20} className="mr-2" />

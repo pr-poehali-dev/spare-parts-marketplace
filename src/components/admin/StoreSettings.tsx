@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -19,6 +19,21 @@ interface StoreSettingsProps {
 }
 
 const StoreSettings: React.FC<StoreSettingsProps> = ({ storeInfo, setStoreInfo }) => {
+  // Загружаем данные из localStorage при инициализации
+  useEffect(() => {
+    const savedStoreInfo = localStorage.getItem('storeInfo');
+    if (savedStoreInfo) {
+      setStoreInfo(JSON.parse(savedStoreInfo));
+    }
+  }, [setStoreInfo]);
+
+  // Функция сохранения настроек
+  const handleSave = () => {
+    localStorage.setItem('storeInfo', JSON.stringify(storeInfo));
+    // Уведомление об успешном сохранении
+    alert('Настройки успешно сохранены!');
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -69,7 +84,7 @@ const StoreSettings: React.FC<StoreSettingsProps> = ({ storeInfo, setStoreInfo }
             rows={4}
           />
         </div>
-        <Button className="w-full">
+        <Button className="w-full" onClick={handleSave}>
           <Icon name="Save" size={20} className="mr-2" />
           Сохранить изменения
         </Button>
