@@ -145,9 +145,31 @@ const Index = () => {
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-4">
               <Icon name="Settings" size={32} className="text-primary" />
-              <h1 className="text-2xl font-bold text-gray-900">{storeInfo.name}</h1>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">{storeInfo.name}</h1>
+                <div className="flex items-center space-x-4 text-sm text-gray-600">
+                  {storeInfo.workingHours && (
+                    <div className="flex items-center space-x-1">
+                      <Icon name="Clock" size={14} />
+                      <span>{storeInfo.workingHours}</span>
+                    </div>
+                  )}
+                  {storeInfo.phone && (
+                    <div className="flex items-center space-x-1">
+                      <Icon name="Phone" size={14} />
+                      <span>{storeInfo.phone}</span>
+                    </div>
+                  )}
+                  {storeInfo.address && (
+                    <div className="flex items-center space-x-1">
+                      <Icon name="MapPin" size={14} />
+                      <span>{storeInfo.address}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="flex items-center space-x-4">
               <Button 
